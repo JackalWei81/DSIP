@@ -35,13 +35,12 @@ namespace :upload do
           end
 
           #存入資料庫
-          #byebug
           if OriDataTable.where("ip_start = ? AND ip_end = ?", ip_start, ip_end).empty?
             OriDataTable.create!(ip_start: ip_start, ip_end: ip_end, province: province, city: city, description: description, remark: remark)
           end
         end
       rescue
-        count == 1 ? (puts "#{filename}，非可處理之檔案類型") : (puts "檔案#{filename}中，第#{count}行資料格式有誤")
+        count == 0 ? (puts "#{filename}，非可處理之檔案類型") : (puts "檔案#{filename}中，第#{count}行資料格式有誤")
       end
     end
   end
